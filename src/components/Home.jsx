@@ -8,10 +8,13 @@ function Home() {
   const [featured, setfeatured] = useState([]);
   const [topMixes, setTopMixes] = useState([]);
   const [madeforyou, setMadeforyou] = useState([]);
-  const [resent, setResent] = useState([]);
+  const [recent, setRecent] = useState([]);
   const [jumpBack, setJumpBack] = useState([]);
   const [uniquelly, setUniquelly] = useState([])
 
+
+
+  
   useEffect(() => {
     http
       .get("featured-playlists")
@@ -34,19 +37,6 @@ function Home() {
       });
   }, []);
 
-  function topseeAll(e) {
-    e.preventDefault();
-
-    http
-      .get("categories/toplists/playlists")
-      .then((response) => {
-        setTopMixes(response.data.playlists.items);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   useEffect(() => {
     http
@@ -63,7 +53,7 @@ function Home() {
     http
       .get("categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
       .then((response) => {
-        setResent(response.data.playlists.items.slice(0, 4));
+        setRecent(response.data.playlists.items.slice(0, 4));
       })
       .catch((err) => {
         console.log(err);
@@ -93,6 +83,93 @@ function Home() {
         console.log(err);
       });
   }, []);
+
+
+
+
+  // see all buttons
+
+  function topseeAll(e) {
+    e.preventDefault();
+
+    http
+      .get("categories/toplists/playlists")
+      .then((response) => {
+        setTopMixes(response.data.playlists.items);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  function madeseeAll(e) {
+    e.preventDefault();
+
+    http
+      .get("categories/0JQ5DAqbMKFHOzuVTgTizF/playlists")
+      .then((response) => {
+        setMadeforyou(response.data.playlists.items);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  
+
+  function recentlyseeAll(e) {
+    e.preventDefault();
+
+    http
+      .get("categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
+      .then((response) => {
+        setRecent(response.data.playlists.items);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
+  function jumpbackseeAll(e) {
+    e.preventDefault();
+
+    http
+      .get("categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
+      .then((response) => {
+        setJumpBack(response.data.playlists.items);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
+  function uniquellyseeAll(e) {
+    e.preventDefault();
+
+    http
+      .get("categories/0JQ5DAqbMKFCbimwdOYlsl/playlists")
+      .then((response) => {
+        setUniquelly(response.data.playlists.items);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
+ 
 
   return (
     <div className="home h-[100vw] pr-[42px] pl-[42px] ">
@@ -170,7 +247,7 @@ function Home() {
             Made for you
           </h1>
           <button
-            onClick={topseeAll}
+            onClick={madeseeAll}
             className="text-white py-1 px-3 hover:bg-slate-900 "
           >
             SEE ALL
@@ -205,15 +282,15 @@ function Home() {
             Recently played
           </h1>
           <button
-            onClick={topseeAll}
+            onClick={recentlyseeAll}
             className="text-white py-1 px-3 hover:bg-slate-900 "
           >
             SEE ALL
           </button>
         </div>
         <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
-          {resent.length > 0 &&
-            resent.map(function (value, index) {
+          {recent.length > 0 &&
+            recent.map(function (value, index) {
               return (
                 <div
                   key={index}
@@ -240,7 +317,7 @@ function Home() {
           Jump back in
           </h1>
           <button
-            onClick={topseeAll}
+            onClick={jumpbackseeAll}
             className="text-white py-1 px-3 hover:bg-slate-900 "
           >
             SEE ALL
@@ -275,7 +352,7 @@ function Home() {
           Uniquely yours
           </h1>
           <button
-            onClick={topseeAll}
+            onClick={uniquellyseeAll}
             className="text-white py-1 px-3 hover:bg-slate-900 "
           >
             SEE ALL
