@@ -3,6 +3,7 @@ import left from "../assets/left.svg";
 import right from "../assets/right.svg";
 import "../App.css";
 import http from "../axios";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [featured, setfeatured] = useState([]);
@@ -17,7 +18,7 @@ function Home() {
   
   useEffect(() => {
     http
-      .get("featured-playlists")
+      .get("browse/featured-playlists")
       .then((response) => {
         setfeatured(response.data.playlists.items.slice(0, 6));
       })
@@ -28,7 +29,7 @@ function Home() {
 
   useEffect(() => {
     http
-      .get("categories/toplists/playlists")
+      .get("browse/categories/toplists/playlists")
       .then((response) => {
         setTopMixes(response.data.playlists.items.slice(0, 4));
       })
@@ -40,7 +41,7 @@ function Home() {
 
   useEffect(() => {
     http
-      .get("categories/0JQ5DAqbMKFHOzuVTgTizF/playlists")
+      .get("browse/categories/0JQ5DAqbMKFHOzuVTgTizF/playlists")
       .then((response) => {
         setMadeforyou(response.data.playlists.items.slice(0, 4));
       })
@@ -51,7 +52,7 @@ function Home() {
 
   useEffect(() => {
     http
-      .get("categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
+      .get("browse/categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
       .then((response) => {
         setRecent(response.data.playlists.items.slice(0, 4));
       })
@@ -63,8 +64,9 @@ function Home() {
 
   useEffect(() => {
     http
-      .get("categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
+      .get("browse/categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
       .then((response) => {
+        console.log(response);
         setJumpBack(response.data.playlists.items.slice(0, 4));
       })
       .catch((err) => {
@@ -75,7 +77,7 @@ function Home() {
 
   useEffect(() => {
     http
-      .get("categories/0JQ5DAqbMKFCbimwdOYlsl/playlists")
+      .get("browse/categories/0JQ5DAqbMKFCbimwdOYlsl/playlists")
       .then((response) => {
         setUniquelly(response.data.playlists.items.slice(0, 4));
       })
@@ -93,7 +95,7 @@ function Home() {
     e.preventDefault();
 
     http
-      .get("categories/toplists/playlists")
+      .get("browse/categories/toplists/playlists")
       .then((response) => {
         setTopMixes(response.data.playlists.items);
       })
@@ -108,7 +110,7 @@ function Home() {
     e.preventDefault();
 
     http
-      .get("categories/0JQ5DAqbMKFHOzuVTgTizF/playlists")
+      .get("browse/categories/0JQ5DAqbMKFHOzuVTgTizF/playlists")
       .then((response) => {
         setMadeforyou(response.data.playlists.items);
       })
@@ -125,7 +127,7 @@ function Home() {
     e.preventDefault();
 
     http
-      .get("categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
+      .get("browse/categories/0JQ5DAqbMKFQ00XGBls6ym/playlists")
       .then((response) => {
         setRecent(response.data.playlists.items);
       })
@@ -141,7 +143,7 @@ function Home() {
     e.preventDefault();
 
     http
-      .get("categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
+      .get("browse/categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
       .then((response) => {
         setJumpBack(response.data.playlists.items);
       })
@@ -157,7 +159,7 @@ function Home() {
     e.preventDefault();
 
     http
-      .get("categories/0JQ5DAqbMKFCbimwdOYlsl/playlists")
+      .get("browse/categories/0JQ5DAqbMKFCbimwdOYlsl/playlists")
       .then((response) => {
         setUniquelly(response.data.playlists.items);
       })
@@ -168,17 +170,38 @@ function Home() {
   }
 
 
+  const navigate = useNavigate()
+
+function handleTopmixes(id) {
+  console.log(id);
+  navigate(`/details/${id}`)
+}
+
+function handleTopmixes(id) {
+  console.log(id);
+  navigate(`/details/${id}`)
+}
+
+function handleTopmixes(id) {
+  console.log(id);
+  navigate(`/details/${id}`)
+}
+
+function handleTopmixes(id) {
+  console.log(id);
+  navigate(`/details/${id}`)
+}
 
  
 
   return (
-    <div className="home h-[100vw] pr-[42px] pl-[42px] ">
+    <div className="home  home-2 pr-[42px] pl-[42px] mx-auto container pb-48">
 
       <div className="flex gap-[22px] items-center pt-5">
-        <div className="bg-blue-950 rounded-full w-10 h-10 flex items-center justify-center">
+        <div className="bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center">
           <img src={left} alt="" />
         </div>
-        <div className="bg-blue-950 rounded-full w-10 h-10 flex items-center justify-center">
+        <div className="bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center">
           <img src={right} alt="" />
         </div>
       </div>
@@ -187,13 +210,14 @@ function Home() {
         Good afternoon
       </h1>
 
-      <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+      <div className=" flex max-w-[988px] mx-auto flex-row flex-wrap gap-7 mb-[50px] ">
         {featured.length > 0 &&
           featured.map(function (value, index) {
             return (
               <div
                 key={index}
-                className="flex w-[479px] bg-blue-900 gap-5 items-center"
+                className="flex w-[479px] bg-blue-900 gap-5 items-center cursor-pointer"
+                onClick={() => {handleTopmixes(value.id)}}
               >
                 <img
                   className="w-[82px] h-[82px]"
@@ -206,25 +230,32 @@ function Home() {
           })}
       </div>
 
-      <div className="mb-[50px]">
-        <div className="mb-[26px] flex justify-between max-w-[990px]">
+
+
+
+
+
+
+      <div className="container mb-[50px] max-w-[1000px] mx-auto">
+        <div className="mb-[26px] flex justify-between max-w-[990px] items-center">
           <h1 className="text-4xl text-white mt-[50px] mb-[29px] font-bold">
             Your top mixes
           </h1>
           <button
             onClick={topseeAll}
-            className="text-white py-1 px-3 hover:bg-slate-900 "
+            className="text-white px-3 py-2 rounded-md  hover:bg-red-400  "
           >
             SEE ALL
           </button>
         </div>
-        <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+        <div className=" flex flex-row flex-wrap gap-6 mb-[50px]  ">
           {topMixes.length > 0 &&
             topMixes.map(function (value, index) {
               return (
                 <div
                   key={index}
-                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center"
+                  className="p-5 w-[224px] bg-gray-950 rounded-md justify-center items-center cursor-pointer"
+                  onClick={() => {handleTopmixes(value.id)}}
                 >
                   <img
                     className="w-[182px] h-[182px] mb-6"
@@ -234,32 +265,33 @@ function Home() {
                   <h1 className="font-bold text-xl text-white ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500">{value.description}</p>
+                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
                 </div>
               );
             })}
         </div>
       </div>
 
-      <div className="mb-[50px]">
-        <div className="mb-[26px] flex justify-between max-w-[990px]">
+      <div className="mb-[50px] max-w-[1000px] mx-auto">
+        <div className="mb-[26px] flex justify-between max-w-[990px] items-center">
           <h1 className="text-4xl text-white mt-[50px] mb-[29px] font-bold">
             Made for you
           </h1>
           <button
             onClick={madeseeAll}
-            className="text-white py-1 px-3 hover:bg-slate-900 "
+            className="text-white px-3 py-2 rounded-md  hover:bg-red-400  "
           >
             SEE ALL
           </button>
         </div>
-        <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+        <div className=" flex flex-row flex-wrap gap-6 mb-[50px] ">
           {madeforyou.length > 0 &&
             madeforyou.map(function (value, index) {
               return (
                 <div
                   key={index}
-                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center"
+                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center cursor-pointer"
+                  onClick={() => {handleTopmixes(value.id)}}
                 >
                   <img
                     className="w-[182px] h-[182px] mb-6"
@@ -269,32 +301,33 @@ function Home() {
                   <h1 className="font-bold text-xl text-white ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500">{value.description}</p>
+                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
                 </div>
               );
             })}
         </div>
       </div>
 
-      <div className="mb-[50px]">
-        <div className="mb-[26px] flex justify-between max-w-[990px]">
+      <div className="home2 mb-[50px] max-w-[1000px] mx-auto">
+        <div className="mb-[26px] flex justify-between max-w-[990px] items-center">
           <h1 className="text-4xl text-white mt-[50px] mb-[29px] font-bold">
             Recently played
           </h1>
           <button
             onClick={recentlyseeAll}
-            className="text-white py-1 px-3 hover:bg-slate-900 "
+            className="text-white px-3 py-2 rounded-md  hover:bg-red-400  "
           >
             SEE ALL
           </button>
         </div>
-        <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+        <div className=" flex flex-row flex-wrap gap-6 mx-auto mb-[50px] ">
           {recent.length > 0 &&
             recent.map(function (value, index) {
               return (
                 <div
                   key={index}
-                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center"
+                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center cursor-pointer"
+                  onClick={() => {handleTopmixes(value.id)}}
                 >
                   <img
                     className="w-[182px] h-[182px] mb-6"
@@ -304,32 +337,33 @@ function Home() {
                   <h1 className="font-bold text-xl text-white ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500">{value.description}</p>
+                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
                 </div>
               );
             })}
         </div>
       </div>
 
-      <div className="mb-[50px]">
-        <div className="mb-[26px] flex justify-between max-w-[990px]">
+      <div className="mb-[50px] max-w-[1000px] mx-auto">
+        <div className="mb-[26px] flex justify-between max-w-[990px] items-center">
           <h1 className="text-4xl text-white mt-[50px] mb-[29px] font-bold">
           Jump back in
           </h1>
           <button
             onClick={jumpbackseeAll}
-            className="text-white py-1 px-3 hover:bg-slate-900 "
+            className="text-white px-3 py-2 rounded-md  hover:bg-red-400  "
           >
             SEE ALL
           </button>
         </div>
-        <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+        <div className=" flex flex-row flex-wrap gap-6 mb-[50px] ">
           {jumpBack.length > 0 &&
             jumpBack.map(function (value, index) {
               return (
                 <div
                   key={index}
-                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center"
+                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center cursor-pointer"
+                  onClick={() => {handleTopmixes(value.id)}}
                 >
                   <img
                     className="w-[182px] h-[182px] mb-6"
@@ -339,32 +373,33 @@ function Home() {
                   <h1 className="font-bold text-xl text-white ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500">{value.description}</p>
+                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
                 </div>
               );
             })}
         </div>
       </div>
 
-      <div className="mb-[50px]">
-        <div className="mb-[26px] flex justify-between max-w-[990px]">
+      <div className="mb-[100px] max-w-[1000px] mx-auto">
+        <div className="mb-[26px] flex justify-between max-w-[990px] items-center">
           <h1 className="text-4xl text-white mt-[50px] mb-[29px] font-bold">
           Uniquely yours
           </h1>
           <button
             onClick={uniquellyseeAll}
-            className="text-white py-1 px-3 hover:bg-slate-900 "
+            className="text-white px-3 py-2 rounded-md  hover:bg-red-400  "
           >
             SEE ALL
           </button>
         </div>
-        <div className=" flex flex-row flex-wrap gap-8 mb-[50px] ">
+        <div className=" flex flex-row flex-wrap gap-6 mb-[50px] ">
           {uniquelly.length > 0 &&
             uniquelly.map(function (value, index) {
               return (
                 <div
                   key={index}
-                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center"
+                  className="p-5 w-[225px] bg-gray-950 rounded-md justify-center items-center cursor-pointer"
+                  onClick={() => {handleTopmixes(value.id)}}
                 >
                   <img
                     className="w-[182px] h-[182px] mb-6"
@@ -374,7 +409,7 @@ function Home() {
                   <h1 className="font-bold text-xl text-white ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500">{value.description}</p>
+                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
                 </div>
               );
             })}

@@ -4,7 +4,7 @@ async function getToken() {
             method : "POST",
             headers: {
                 'Content-type': "application/x-www-form-urlencoded",
-                'Authorization': `Basic ${btoa("a444201d05e740a98b8a2813ad984da1" + ":" + "d3b39c0ae97744099428cd9ddeb3930c")}`
+                'Authorization': `Basic ${btoa("7b73fb328696451d92ff1ade335dacad" + ":" + "be21fcc1970b42d8b81cfda48c48479a")}`
             },
             body: "grant_type=client_credentials"
         });
@@ -18,3 +18,7 @@ async function getToken() {
 }
 
 export  {getToken}
+
+
+// client Id:7b73fb328696451d92ff1ade335dacad
+// client secret : be21fcc1970b42d8b81cfda48c48479a
