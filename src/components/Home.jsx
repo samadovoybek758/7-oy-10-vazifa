@@ -66,7 +66,6 @@ function Home() {
     http
       .get("browse/categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
       .then((response) => {
-        console.log(response);
         setJumpBack(response.data.playlists.items.slice(0, 4));
       })
       .catch((err) => {
@@ -177,20 +176,7 @@ function handleTopmixes(id) {
   navigate(`/details/${id}`)
 }
 
-function handleTopmixes(id) {
-  console.log(id);
-  navigate(`/details/${id}`)
-}
 
-function handleTopmixes(id) {
-  console.log(id);
-  navigate(`/details/${id}`)
-}
-
-function handleTopmixes(id) {
-  console.log(id);
-  navigate(`/details/${id}`)
-}
 
  
 
