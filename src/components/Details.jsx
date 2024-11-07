@@ -143,7 +143,7 @@ function Details() {
                   <img src={like} alt="" />
                   <h1 className="text-xl font-medium">
                     {Math.floor(value.track.duration_ms / 60000) +
-                      ":" + (Math.floor(value.track.duration_ms % 60000) /1000
+                      ":" + Math.round((Math.floor(value.track.duration_ms % 60000) /1000)
                         
                       )}
                   </h1>

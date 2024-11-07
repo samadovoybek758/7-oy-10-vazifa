@@ -35,7 +35,8 @@ function MainLayouts({children}) {
             </div>
             <div className='flex gap-5 items-center'>
                 <img src={liked_songs} alt="" />
-                <h1 className='text-white text-lg font-bold hover:text-gray-400 cursor-pointer'>Liked Songs</h1>
+                <Link className='text-white text-lg font-bold hover:text-gray-400 cursor-pointer' to={'/likes'}>Liked Songs</Link>
+                
             </div>
            </div>
         </div>
