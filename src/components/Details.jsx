@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import SpotifyPlayer from 'react-spotify-player';
+
 import http from "../axios";
 import right from "../assets/right.svg";
 import left from "../assets/left.svg";
@@ -14,6 +17,7 @@ import like from "../assets/like.svg";
 function Details() {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  const [audio, setAudio] = useState("")
   const params = useParams();
   const token = localStorage.getItem("token");
 
@@ -21,31 +25,34 @@ function Details() {
     http
       .get(`playlists/${params.id}`)
       .then((res) => {
-        // console.log(res);
+       console.log(res.data.tracks.items);
         setData([res.data]);
+        setData2(res.data.tracks.items.slice(0,20))
       })
       .catch((err) => {
         console.log(err);
       });
   }, [params.id, token]);
 
-  useEffect(() => {
-    http
-      .get("browse/categories/0JQ5DAqbMKFLVaM30PMBm4/playlists")
-      .then((response) => {
-        setData2(response.data.playlists.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+ 
 
+  const playerSize = {
+    width: '100%',
+    height: 80
+  };
+  const view = 'list'; 
+  const theme = 'black'; 
+    
+  
+
+ 
   function playSong(audio) {
-    new Audio(audio).play;
+    setAudio(audio)
+   
   }
 
   return (
-    <div className="mx-auto pl-20 pr-20   datails">
+    <div className="mx-auto pl-20 pr-20   datails pb-40">
       <div className="flex gap-[22px] mb-12 items-center pt-5">
         <div className="bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center">
           <img src={left} alt="" />
@@ -111,39 +118,48 @@ function Details() {
             return (
               <div
                 key={index}
-                className="text-white flex justify-between max-w-[986px] py-[10px] pr-16 "
-                onClick={() => {
-                  playSong(value.external_urls.spotify);
-                }}
-              >
+                className="text-white flex justify-between max-w-[986px] py-[10px] pr-16 cursor-pointer"
+                onClick={() => 
+                  playSong(value.track.external_urls.spotify)} > 
                 <div className="flex gap-3 w-[200px]">
-                  <img
+                  {/* <img
                     className="w-[52px] h-[52px] mb-6"
                     src={value.images[0]?.url}
                     alt=""
-                  />
-                  <h1 className="ml-5">{value.name}</h1>
+                  /> */}
+                  <div>
+                  <h1 className="ml-5">{value.track.name}</h1>
+                  <h1 className="text-lg text-gray-500 font-medium">
+                  {value.track.artists[0].name}
+                  
+                </h1>
+                  </div>
                 </div>
                 <h1 className="text-lg text-gray-500 font-medium">
-                  {value.description.slice(0, 20)}
+                {value.track.album.album_type}
                 </h1>
                 <span className="w-40"></span>
                 <div className="flex items-center gap-2">
                   <img src={like} alt="" />
                   <h1 className="text-xl font-medium">
-                    {Math.floor(value.tracks.total / 60) +
-                      ":" +
-                      Math.round(
-                        (value.tracks.total / 60 -
-                          Math.floor(value.tracks.total / 60)) *
-                          60
+                    {Math.floor(value.track.duration_ms / 60000) +
+                      ":" + (Math.floor(value.track.duration_ms % 60000) /1000
+                        
                       )}
                   </h1>
+              
                 </div>
               </div>
             );
           })}
+           
       </div>
+      <SpotifyPlayer
+        uri={audio}
+        size={playerSize}
+        view={view}
+        theme={theme}
+      />
     </div>
   );
 }
