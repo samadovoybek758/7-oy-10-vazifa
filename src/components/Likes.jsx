@@ -26,7 +26,7 @@ function Likes() {
   },[])
 
   return (
-    <div className='mx-auto likes pl-14 pr-20 w-[100vw] h-[100vw]'> 
+    <div className='mx-auto likes pl-14 pr-20 w-[100vw] pb-[100px]'> 
       <div className="flex gap-[22px] items-center pt-5 mx-auto">
         <div className="bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center">
           <img src={left} alt="" />
