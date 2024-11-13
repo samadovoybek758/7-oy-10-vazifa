@@ -9,24 +9,14 @@ import nuqta from "../assets/3nuqda.svg";
 import search from "../assets/search2.svg";
 import clock from "../assets/clock.svg";
 import http from '../axios';
+import { useSelector } from 'react-redux';
 
 function Likes() {
-  const[data,setData] = useState([])
+  const data = useSelector((state) => state.likedTracks);
 
-  useEffect(() =>{
-    http
-      .get("browse/categories/toplists/playlists")
-      .then((response) => {
-        setData(response.data.playlists.items);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  },[])
-
+  
   return (
-    <div className='mx-auto likes pl-14 pr-20 w-[100vw] pb-[100px]'> 
+    <div className='mx-auto likes pl-14 pr-20 w-[100vw] h-[100vw] pb-[100px]'> 
       <div className="flex gap-[22px] items-center pt-5 mx-auto">
         <div className="bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center">
           <img src={left} alt="" />
@@ -85,13 +75,22 @@ function Likes() {
                 >
                   <img
                     className="w-[54px] h-[54px] mb-6"
-                    src={value.images[0]?.url}
+                    src={value.album.images[2]?.url}
                     alt=""
                   />
+                  <div className='flex flex-col gap-2 items-center'>
                   <h1 className="ml-5 ">
                     {value.name}
                   </h1>
-                  <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p>
+                  <h1 className="text-lg text-gray-500 font-medium">{value.artists[0].name}</h1>
+                 
+                  </div>
+                  <h1 className="text-xl font-medium">
+                    {Math.floor(value.duration_ms / 60000) +
+                      ":" +
+                      Math.round((Math.floor(value.duration_ms % 60000) / 1000))}
+                  </h1>
+                  {/* <p className="text-gray-500 mt-3">{value.description.slice(0,30) + ' ...'}</p> */}
                 </div>
               );
             })}

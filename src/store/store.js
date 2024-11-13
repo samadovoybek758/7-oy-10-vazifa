@@ -1,5 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+// src/store/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import likedReducer from './likedSlice'; 
 
-export const store = configureStore({
-  reducer: {},
-})
+// Redux store yaratish
+const store = configureStore({
+  reducer: {
+    likedTracks: likedReducer, 
+  },
+});
+
+export default store; 

@@ -73,9 +73,9 @@ function MainLayouts({children}) {
             </div>
         </div>
 
-        <div className='footer w-[100vw] fixed bg-black h-[112px] z-10 bottom-0'>
+        {/* <div className='footer w-[100vw] fixed bg-black h-[112px] z-10 bottom-0'>
             <h1>fvdfvdsv</h1>
-        </div>
+        </div> */}
     </div>
   )
 }
